@@ -16,9 +16,6 @@ picardie$codeINSEE <- as.character(picardie$INSEE_COM)
 summary(picardie)
 
 
-## @knitr shp3
-require(sp)
-plot(picardie)
 
 
 ## @knitr shp4
@@ -33,10 +30,6 @@ summary(picardie@data$NOM_DEPT)
 ## @knitr data2
 somme <- picardie[picardie@data$CODE_DEPT == "80",]
 
-
-## @knitr save
-save(picardie, file="./donnees/picardie.Rdata")
-load("picardie.Rdata")
 
 
 ## @knitr union
@@ -73,14 +66,6 @@ carte.qual(somme, mini_picardie, varname="type_urbain", sp.key="codeINSEE", data
 arrdts <- unionSpatialPolygons(somme, IDs=somme@data$CODE_ARR)
 carte.qual(somme, mini_picardie, varname="type_urbain", sp.key="codeINSEE", data.key="codeINSEE", palette=pal, posleg="bottomleft", main="Le découpage en ZAUER en Picardie", sub="source : INSEE.")
 plot(arrdts, lwd=5, border = "red", add = TRUE)
-
-
-## @knitr coloration1
-library(RColorBrewer)
-colors <- brewer.pal(6, "RdBu") 
-pal <- colorRampPalette(colors) 
-carte.prop(picardie, mini_picardie, "revenu.fiscal.moyen", sp.key="codeINSEE", data.key="codeINSEE", at=as.integer(levels(as.factor(mini_picardie$revenu.fiscal.moyen))), border="transparent", palette=pal(length(levels(as.factor(mini_picardie$revenu.fiscal.moyen)))), posleg="none", main="Le revenu fiscal moyen des ménages par communes")
-plot(dpts, add=T)
 
 
 ## @knitr coloration
