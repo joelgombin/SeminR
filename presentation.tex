@@ -183,7 +183,7 @@ picardie <- \hlfunctioncall{readOGR}(\hlstring{"donnees/"}, \hlstring{"picardie"
 \end{verbatim}
 \begin{alltt}
 picardie\$STATUT <- \hlfunctioncall{as.factor}(\hlfunctioncall{iconv}(picardie\$STATUT, from = \hlstring{"latin1"}, to = \hlstring{"utf8"}))  ## traitement de problèmes d'encodage
-picardie\$codeINSEE <- \hlfunctioncall{as.character}(picardie\$INSEE\_COM)
+picardie\$codeINSEE <- \hlfunctioncall{as.character}(picardie\$INSEE_COM)
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -236,13 +236,13 @@ Une carte est donc un objet de type \verb!SpatialPolygonsDataFrame!. Il contient
 \hlfunctioncall{names}(picardie@data)
 \end{alltt}
 \begin{verbatim}
-##  [1] "ID\_GEOFLA"  "CODE\_COMM"  "INSEE\_COM"  "NOM\_COMM"   "STATUT"    
-##  [6] "X\_CHF\_LIEU" "Y\_CHF\_LIEU" "X\_CENTROID" "Y\_CENTROID" "Z\_MOYEN"   
-## [11] "SUPERFICIE" "POPULATION" "CODE\_CANT"  "CODE\_ARR"   "CODE\_DEPT" 
-## [16] "NOM\_DEPT"   "CODE\_REG"   "NOM\_REGION" "codeINSEE"
+##  [1] "ID_GEOFLA"  "CODE_COMM"  "INSEE_COM"  "NOM_COMM"   "STATUT"    
+##  [6] "X_CHF_LIEU" "Y_CHF_LIEU" "X_CENTROID" "Y_CENTROID" "Z_MOYEN"   
+## [11] "SUPERFICIE" "POPULATION" "CODE_CANT"  "CODE_ARR"   "CODE_DEPT" 
+## [16] "NOM_DEPT"   "CODE_REG"   "NOM_REGION" "codeINSEE"
 \end{verbatim}
 \begin{alltt}
-\hlfunctioncall{summary}(picardie@data\$NOM\_DEPT)
+\hlfunctioncall{summary}(picardie@data\$NOM_DEPT)
 \end{alltt}
 \begin{verbatim}
 ## AISNE  OISE SOMME 
@@ -260,7 +260,7 @@ De plus, on manipule une carte comme n'importe quel dataframe :
 \begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-somme <- picardie[picardie@data\$CODE\_DEPT == \hlstring{"80"}, ]
+somme <- picardie[picardie@data\$CODE_DEPT == \hlstring{"80"}, ]
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -296,12 +296,12 @@ On a parfois besoin de regrouper entre eux des polygones. Par exemple, de ma car
 \end{verbatim}
 \begin{alltt}
 \hlfunctioncall{require}(maptools)
-dpts <- \hlfunctioncall{unionSpatialPolygons}(picardie, IDs = picardie@data\$CODE\_DEPT)
+dpts <- \hlfunctioncall{unionSpatialPolygons}(picardie, IDs = picardie@data\$CODE_DEPT)
 \hlfunctioncall{plot}(dpts)
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=.6\linewidth]{images/union} 
+{\centering \includegraphics[width=.4\linewidth]{images/union} 
 
 }
 
@@ -321,8 +321,8 @@ On commence par vérifier qu'on a bien un identidiant commun à nos données et 
 \begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlfunctioncall{load}(\hlstring{"donnees/mini\_picardie.Rdata"})
-\hlfunctioncall{head}(mini\_picardie\$CODE\_COMMU)
+\hlfunctioncall{load}(\hlstring{"donnees/mini_picardie.Rdata"})
+\hlfunctioncall{head}(mini_picardie\$CODE_COMMU)
 \end{alltt}
 \begin{verbatim}
 ## [1] 001 002 003 004 005 006
@@ -330,7 +330,7 @@ On commence par vérifier qu'on a bien un identidiant commun à nos données et 
 \end{verbatim}
 \begin{alltt}
 \hlcomment{# Non, donc on recode :}
-mini\_picardie\$codeINSEE <- \hlfunctioncall{paste}(\hlfunctioncall{as.character}(mini\_picardie\$CODE\_D\_PAR), \hlfunctioncall{as.character}(mini\_picardie\$CODE\_COMMU), 
+mini_picardie\$codeINSEE <- \hlfunctioncall{paste}(\hlfunctioncall{as.character}(mini_picardie\$CODE_D_PAR), \hlfunctioncall{as.character}(mini_picardie\$CODE_COMMU), 
     sep = \hlstring{""})
 \end{alltt}
 \end{kframe}
@@ -346,9 +346,9 @@ Par facilité, on ne va travailler que sur la Somme. On utilise la fonction \ver
 \begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-somme <- picardie[picardie@data\$CODE\_DEPT == \hlstring{"80"}, ]
-\hlfunctioncall{carte.prop}(somme, mini\_picardie, varname = \hlstring{"AbsIns"}, sp.key = \hlstring{"codeINSEE"}, data.key = \hlstring{"codeINSEE"}, 
-    at = \hlfunctioncall{quantile}(mini\_picardie\$AbsIns, \hlfunctioncall{c}(0, 0.25, 0.5, 0.75, 1)))
+somme <- picardie[picardie@data\$CODE_DEPT == \hlstring{"80"}, ]
+\hlfunctioncall{carte.prop}(somme, mini_picardie, varname = \hlstring{"AbsIns"}, sp.key = \hlstring{"codeINSEE"}, data.key = \hlstring{"codeINSEE"}, 
+    at = \hlfunctioncall{quantile}(mini_picardie\$AbsIns, \hlfunctioncall{c}(0, 0.25, 0.5, 0.75, 1)))
 \end{alltt}
 \end{kframe}
 
@@ -381,7 +381,7 @@ Admettons que nous voulions représenter les effectifs des communes de la Somme.
 \begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlfunctioncall{carte.eff}(somme, mini\_picardie, varname = \hlstring{"Population"}, sp.key = \hlstring{"codeINSEE"}, 
+\hlfunctioncall{carte.eff}(somme, mini_picardie, varname = \hlstring{"Population"}, sp.key = \hlstring{"codeINSEE"}, 
     data.key = \hlstring{"codeINSEE"})
 \end{alltt}
 \end{kframe}
@@ -405,7 +405,7 @@ La syntaxe est toujours très proche, on utilise cette fois-ci la fonction \verb
 \begin{alltt}
 
 pal <- \hlfunctioncall{c}(\hlstring{"orange"}, \hlstring{"yellow"}, \hlstring{"light green"}, \hlstring{"red"})
-\hlfunctioncall{carte.qual}(somme, mini\_picardie, varname = \hlstring{"type\_urbain"}, sp.key = \hlstring{"codeINSEE"}, 
+\hlfunctioncall{carte.qual}(somme, mini_picardie, varname = \hlstring{"type_urbain"}, sp.key = \hlstring{"codeINSEE"}, 
     data.key = \hlstring{"codeINSEE"}, palette = pal, posleg = \hlstring{"bottomleft"}, main = \hlstring{"Le découpage en ZAUER en Picardie"}, 
     sub = \hlstring{"source : INSEE."})
 \end{alltt}
@@ -429,8 +429,8 @@ Imaginons que nous voulions rajouter les découpages des arrondissements. Il nou
 \begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-arrdts <- \hlfunctioncall{unionSpatialPolygons}(somme, IDs = somme@data\$CODE\_ARR)
-\hlfunctioncall{carte.qual}(somme, mini\_picardie, varname = \hlstring{"type\_urbain"}, sp.key = \hlstring{"codeINSEE"}, 
+arrdts <- \hlfunctioncall{unionSpatialPolygons}(somme, IDs = somme@data\$CODE_ARR)
+\hlfunctioncall{carte.qual}(somme, mini_picardie, varname = \hlstring{"type_urbain"}, sp.key = \hlstring{"codeINSEE"}, 
     data.key = \hlstring{"codeINSEE"}, palette = pal, posleg = \hlstring{"bottomleft"}, main = \hlstring{"Le découpage en ZAUER en Picardie"}, 
     sub = \hlstring{"source : INSEE."})
 \hlfunctioncall{plot}(arrdts, lwd = 5, border = \hlstring{"red"}, add = TRUE)
@@ -459,9 +459,9 @@ Le "truc" consiste à passer autant de breaks, et de couleurs, à la fonction qu
 \hlfunctioncall{library}(RColorBrewer)
 colors <- \hlfunctioncall{brewer.pal}(6, \hlstring{"RdBu"})
 pal <- \hlfunctioncall{colorRampPalette}(colors)
-\hlfunctioncall{carte.prop}(picardie, mini\_picardie, \hlstring{"revenu.fiscal.moyen"}, sp.key = \hlstring{"codeINSEE"}, 
-    data.key = \hlstring{"codeINSEE"}, at = \hlfunctioncall{as.integer}(\hlfunctioncall{levels}(\hlfunctioncall{as.factor}(mini\_picardie\$revenu.fiscal.moyen))), 
-    border = \hlstring{"transparent"}, palette = \hlfunctioncall{pal}(\hlfunctioncall{length}(\hlfunctioncall{levels}(\hlfunctioncall{as.factor}(mini\_picardie\$revenu.fiscal.moyen)))), 
+\hlfunctioncall{carte.prop}(picardie, mini_picardie, \hlstring{"revenu.fiscal.moyen"}, sp.key = \hlstring{"codeINSEE"}, 
+    data.key = \hlstring{"codeINSEE"}, at = \hlfunctioncall{as.integer}(\hlfunctioncall{levels}(\hlfunctioncall{as.factor}(mini_picardie\$revenu.fiscal.moyen))), 
+    border = \hlstring{"transparent"}, palette = \hlfunctioncall{pal}(\hlfunctioncall{length}(\hlfunctioncall{levels}(\hlfunctioncall{as.factor}(mini_picardie\$revenu.fiscal.moyen)))), 
     posleg = \hlstring{"none"}, main = \hlstring{"Le revenu fiscal moyen des ménages par communes"})
 \hlfunctioncall{plot}(dpts, add = T)
 \end{alltt}
@@ -494,6 +494,7 @@ De plus, en scriptant, on peut produire très rapidement de très nombreuses car
 
 
 Pour la route, le blog d'un géographe anglais produisant de magnifiques cartes sous R : \url{http://spatialanalysis.co.uk/}.
+
 
 Présentation disponible sur : \url{https://github.com/joelgombin/SeminR}
 

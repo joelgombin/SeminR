@@ -95,7 +95,7 @@ Par ailleurs, le package \verb!ggplot2! propose également une fonction pour rep
 \frametitle{Les outils du package \verb!rgrs!}
 Dans le cadre de cette introduction, je vais présenter essentiellement les outils du package \verb!rgrs! développé par \href{http://alea.fr.eu.org/}{Julien Barnier}. Ils sont à la fois faciles à utiliser et relativement puissants. Une fois la logique assimilée, il sera aisé d'aller plus loin si nécessaire.
 
-<<initialisation, results='hide', message =FALSE, warning=FALSE>>=
+<<initialisation, results='hide', message=FALSE, warning=FALSE>>=
 library(rgrs)
 library(sp)
 library(maptools)
@@ -168,7 +168,7 @@ load("picardie.Rdata")
 \frametitle{Agréger des éléments cartographiques}
 On a parfois besoin de regrouper entre eux des polygones. Par exemple, de ma carte communale, je veux tirer une carte des départements. 
 
-<<union, dev=pdf, out.width=.6\linewidth, fig.align=center, fig.path=images/>>=
+<<union, dev=pdf, out.width=.4\linewidth, fig.align=center, fig.path=images/>>=
 require(gpclib)
 gpclibPermit()
 require(maptools)
@@ -200,7 +200,9 @@ Par facilité, on ne va travailler que sur la Somme. On utilise la fonction \ver
 
 <<carteprop,dev=pdf, out.width=.55\linewidth, fig.align=center, message=FALSE, fig.path=images/, resulats='markup'>>=
 somme <- picardie[picardie@data$CODE_DEPT == "80",]
-carte.prop(somme, mini_picardie, varname="AbsIns", sp.key="codeINSEE", data.key="codeINSEE", at=quantile(mini_picardie$AbsIns, c(0,.25,.5,.75,1)))
+carte.prop(somme, mini_picardie, varname="AbsIns", 
+           sp.key="codeINSEE", data.key="codeINSEE", 
+           at=quantile(mini_picardie$AbsIns, c(0,.25,.5,.75,1)))
 @
 
 
